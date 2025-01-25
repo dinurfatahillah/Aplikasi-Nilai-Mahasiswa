@@ -1,0 +1,117 @@
+#include<iostream>
+#include<string>
+
+const int jumlah = 5;
+std::string nama[jumlah] = {};
+int bahasa[jumlah] = {};
+int mtk[jumlah] = {};
+int pilih;
+std::string editNama;
+
+int printData(){
+   for (int i = 0; i < jumlah; i++){
+       if (!bahasa[i] || !mtk[i]){
+           std::cout << "[ Data Masih Kosong ]" << std::endl;
+           std::cout << std::endl;
+           std::cout << "Pilih 9 Untuk Kembali :" << std::endl;
+           std::cin >> pilih;
+           return 0;
+       }
+       std::cout << "Nama : " << nama[i] << ", Nilai Bahasa : " << bahasa[i] << ", Nilai MTK : " << mtk[i] << std::endl;
+   }
+   std::cout << "Pilih 9 Untuk Kembali" << std::endl;
+   std::cin >> pilih;
+   return 0;
+}
+
+
+int editDataMhs(){
+   for (int i = 0; i < jumlah; i++){
+       std::cout << "Data Mahasiswa Ke-" << i + 1 << std::endl;
+       std::cout << "Nama : "; std::cin >> nama[i];
+       std::cout << "Nilai Bahasa : "; std::cin >> bahasa[i];
+       std::cout << "Nilai MTK    : "; std::cin >> mtk[i];
+   }
+   std::cout << "Pilih 9 Untuk Kembali" << std::endl;
+   std::cin >> pilih;
+   return 0;
+}
+
+int editBerdasarkanNama(std::string namaMhs)
+{
+   std::cout << "Msukan Nama Mahasiswa Yang Akan Di Edit : "; std::cin>>namaMhs;
+   for (int i = 0; i < jumlah; i++){
+       if (nama[i] == namaMhs){
+           std::cout << "Data Mahasiswa Ke-" << i + 1 <<"\n" << std::endl;
+           std::cout << "Nama :" << nama[i] << std::endl;
+           std::cout << "Edit Nilai Bahasa : "; std::cin >> bahasa[i];
+           std::cout << "Edit Nilai MTK    : "; std::cin >> mtk[i]; std::cout << "\n";
+           std::cout << "Berhasil Disimpan" << std::endl << "\n";
+           std::cout << "Pilih 9 Untuk Kembali" << std::endl;
+           std::cin >> pilih;
+           return 0;
+       } else{
+           std::cerr << "Mahasiswa dengan nama  " << namaMhs <<" tidak ditemukan"<< std::endl;
+           std::cout<<std::endl;
+           std::cout << "Pilih 9 Untuk Kembali" << std::endl;
+           std::cin >> pilih;
+           return 0;
+       }
+   }
+}
+
+
+int tampilkanRataRata(std::string namaMhs){
+   for (int i = 0; i < jumlah; i++){
+       float rerata = 0;
+       std::cout << "MAsukan Nama Mahasiswa Yang Ingin Ditampilkan Rata Rata nya : " << std::endl;
+       std::cin >> namaMhs;
+       if (nama[i] == namaMhs){
+           rerata = (bahasa[i] * mtk[i]) / 2;
+           std::cout << "Nama            : " << nama[i] << std::endl;
+           std::cout << "Nilai Bahasa    : " << bahasa[i] << std::endl;
+           std::cout << "Nilai MTK       : " << mtk[i] << std::endl;
+           std::cout << "Nilai Rata Rata : " << rerata << std::endl;
+       } else{
+           std::cout << "Mahasiswa dengan nama " << namaMhs <<" tidak ditemukan" << std::endl;
+       }
+   }
+   std::cout << "Pilih 9 Untuk Kembali" << std::endl;
+   std::cin >> pilih;
+   return 0;
+}
+int main (){
+       std::cout << "#########################################" << std::endl;
+       std::cout << "=========APLIKASI DATA MAHASISWA=========" << std::endl;
+       std::cout << "#########################################"<<std::endl;
+       std::cout << std::endl;
+       std::cout << "INPUT DATA MAHASISWA" << std::endl;
+
+
+       do{
+           std::cout << "1) Tampilkan 5 Data Mahasiswa" << std::endl;
+           std::cout << "2) Edit Semua Data Mahasiswa" << std::endl;
+           std::cout << "3) Edit Nilai Mahsiswa  Berdasarkan Nama" << std::endl;
+           std::cout << "4) Tampilkan Rata Rata NIlai" << std::endl;
+           std::cout << "9) Exit" << std::endl;
+           std::cout << std::endl;
+           std::cout << "Pilih Nomor : ";
+           std::cin >> pilih;
+
+
+           if (pilih == 1){
+               printData();
+           } else if (pilih == 2){
+               editDataMhs();
+           } else if (pilih == 3){
+               editBerdasarkanNama(editNama);
+           } else if (pilih == 4){
+               tampilkanRataRata(editNama);
+           } else{
+               std::cout << "ANDA KELUAR DARI APLIKASI";
+               return 0;
+           }
+       } while (pilih == 1 || pilih == 2 || pilih == 3 || pilih == 4 || pilih == 9);
+
+
+}
